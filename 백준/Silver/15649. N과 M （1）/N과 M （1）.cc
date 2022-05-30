@@ -1,39 +1,55 @@
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <algorithm>
+#include <vector>
 
 using namespace std;
 
-int num[8] = { 1, 2, 3, 4, 5, 6, 7, 8 };
-bool visit[8] = { false };
 int n, m;
-vector <int> q;
+bool visit[10] = { 0 };
+vector <int> v;
 
-void backtrack(int idx)
+void backtrack(int cnt)
 {
-	if (idx >= n) return;
-
-	if (q.size() == m) {	//다 채웠음
+	//다 채웠으면 출력
+	if (cnt == m) {
 		for (int i = 0; i < m; i++) {
-			cout << q[i] << " ";
+			cout << v[i] << " ";
 		}
-		cout << "\n";
+		cout << '\n';
+		return;
 	}
-	else {
-		for (int i = 0; i < n; i++) {
-			if (visit[i] == false) {
-				visit[i] = true;
-				q.push_back(num[i]);
-				backtrack(i);
-				visit[i] = false;
-				q.pop_back();
-			}
+
+	//백트래킹
+	for (int i = 1; i <= n; i++) {
+		if (visit[i] == 0) {
+			visit[i] = 1;
+			v.push_back(i);
+			backtrack(v.size());
+			visit[i] = 0;
+			v.pop_back();
+		}
+	}
+}
+
+void solution()
+{
+	cin >> n >> m;
+
+	for (int i = 1; i <= n; i++) {
+		if (visit[i] == 0) {
+			visit[i] = 1;
+			v.push_back(i);
+			backtrack(v.size());
+			visit[i] = 0;
+			v.pop_back();
 		}
 	}
 }
 
 int main()
 {
-	cin >> n >> m;
+	ios::sync_with_stdio(0);
+	cin.tie(0); cout.tie(0);
 
-	backtrack(0);
+	solution();
 }
