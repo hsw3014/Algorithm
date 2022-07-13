@@ -70,7 +70,7 @@ void solution()
 		//부모가 다르면 연결 후 부모 변경
 		if (now_parent_from != now_parent_to) {
 			result += now_dist;
-			parent[now_parent_to] = now_parent_from;
+			parent[now_parent_from] = now_parent_to;
 		}
 	}
 
