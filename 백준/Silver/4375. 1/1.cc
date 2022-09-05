@@ -14,7 +14,6 @@ int n;
 
 void solution()
 {
-
 	while (cin >> n) {
 		unsigned long long num = 1;
 		int res = 1;
